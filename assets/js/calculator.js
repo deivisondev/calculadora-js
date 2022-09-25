@@ -26,12 +26,7 @@ function calculator() {
                     }
                 }
 
-                try {
-                    actions[element.classList[1]]();
-                }
-                catch(e) {
-                    return;
-                }
+                actions[element.classList[1]]?.();
             });
         },
 
