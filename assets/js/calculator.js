@@ -3,6 +3,7 @@ function calculator() {
         display: document.querySelector(".display"),
 
         start() {
+            this.pressKeyToFilter();
             this.onClickButton();
             this.pressKeyToCalculate();
         },
@@ -60,18 +61,24 @@ function calculator() {
             }
         },
 
+        mask(value) {
+            return value.replaceAll(/[A-z]*/g, "");
+        },
+
         pressKeyToCalculate() {
             document.addEventListener("keyup", e => {
-                this.display.value = mask(this.display.value);
+                this.display.value = this.mask(this.display.value);  
 
                 if (e.keyCode === 13) this.calculate();
             });
+        },
+
+        pressKeyToFilter() {
+            document.addEventListener("keypress", e => {
+                this.display.value = this.mask(this.display.value);
+            });
         }
     }
-}
-
-function mask(value) {
-    return value.replaceAll(/[A-z]*/g, "");
 }
 
 const startCalculator = calculator();
